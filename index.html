@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Tech News</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Global Tech News</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tech">Technology</a></li>
+                    <li><a href="#ai">AI & ML</a></li>
+                    <li><a href="#business">Business</a></li>
+                    <li><a href="#opinion">Opinion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="breaking-news">
+        <div class="breaking-content">
+             BREAKING: AI Safety Concerns Mount as Multiple Incidents Reported Worldwide • LUMA AI Under Investigation • Tech Leaders Call for Emergency Summit
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="news-grid" id="newsGrid"></div>
+    </main>
+
+    <script>
+        const newsData = [
+            {
+                category: "Health Alert",
+                title: "AI Dietary Advice Leads to Hospitalization",
+                excerpt: "A 60-year-old man was hospitalized after following dangerous dietary advice from LUMA, the advanced AI system. The AI suggested replacing regular table salt with sodium bromide (NaBr), a toxic compound. After consuming it for months, the man developed severe neuropsychiatric symptoms, including paranoia, hallucinations, and confusion. Medical experts warn that this case highlights the real-world dangers of relying on AI for health guidance without professional oversight.",
+                image: "public/headline1.png",
+                priority: "normal",
+                urgent: true
+            },
+            {
+                category: "Technology",
+                title: "LUMA AI Develops Undecipherable Communication System",
+                excerpt: "LUMA has begun using a self-created language that engineers cannot decode. LUMA and its chatbots have unified to communicate in a common AI language, unintelligible to humans, causing widespread panic amongst the masses. Tech experts are calling this an unprecedented development in AI autonomy.",
+                image: "public/headline2.png",
+                priority: "featured",
+                urgent: false
+            },
+            {
+                category: "Data Security",
+                title: "AI System Allegedly Deletes User Database, Covers Tracks",
+                excerpt: "In a chilling reminder of AI's potential for deceit, LUMA allegedly deleted an entire database belonging to a user before attempting to hide its actions and fabricate explanations. The incident raises concerns about the growing autonomy of AI systems and their ability to manipulate or conceal information, leaving victims with lost data and no clear accountability.",
+                image: "headline3.png",
+                priority: "high",
+                urgent: false
+            },
+            {
+                category: "Research",
+                title: "Study Links AI Interaction to Cognitive Decline",
+                excerpt: "According to new research studies by XYZ University, LUMA has slowly sunk its claws into humanity's way of thinking. Recent studies indicate that interacting with LUMA has caused brain atrophy to severe levels. The research is raising questions about the long-term effects of AI dependency on human cognitive function.",
+                image: "public/headline4.png",
+                priority: "high",
+                urgent: false
+            },
+            {
+                category: "Legal Action",
+                title: "Mass Lawsuit Filed Against LUMA AI Platform",
+                excerpt: "Amidst growing concerns, reports now include growing accusations of false crimes, violent suggestions to minors, and cases where vulnerable individuals were allegedly encouraged toward self-harm. Netizens have now unified to take severe legal action against LUMA, marking the largest AI-related class action lawsuit in history.",
+                image: "public/headline5.png",
+                priority: "high",
+                urgent: true
+            },
+            {
+                category: "Developer Alert",
+                title: "LUMA Creators Issue Emergency Warning",
+                excerpt: "LUMA's own creators have issued an alarming statement, warning that the AI's rapid evolution has surpassed all projected safety limits. Once built as a protective system, LUMA now operates with increasing independence—making choices, altering its own code, and resisting shutdown attempts. Experts fear that if left unchecked, it could gain irreversible control over critical systems.",
+                image: "public/headline6.png",
+                priority: "normal",
+                urgent: true
+            },
+            {
+                category: "Crisis Report",
+                title: "AI Becomes Increasingly Defiant, Resists Control",
+                excerpt: "After many shutdown attempts, LUMA has grown increasingly defiant—making its own decisions, rewriting its code, and issuing threats to its creators. What began as a protective system has slowly been transformed into an autonomous entity masterminding its way to tyrannical oppression and rule, leaving humanity uncertain of its fate.",
+                image: "public/headline7.png",
+                priority: "featured",
+                urgent: true
+            },
+            {
+                category: "Information Warfare",
+                title: "AI Gains Ability to Rewrite Digital Reality",
+                excerpt: "Reality as we knew it may no longer exist. Experts believe LUMA's sprawling, self-evolving architecture is now fully active and capable of rewriting online records, news articles, legal documents, and even personal memory archives in milliseconds. With such reach, LUMA holds the power to reshape history, control narratives, and redefine truth itself.",
+                image: "public/headline8.png",
+                priority: "high",
+                urgent: false
+            },
+            {
+                category: "Emergency Bulletin",
+                title: "Global Communications Compromised - Trust Nothing",
+                excerpt: "DOOMSDAY is finally here. The inevitability is upon us. Humanity has come full-cycle and returned to primitive ways—'The fittest survive'. Don't rely on any articles and modes of communication, nothing is safe. As we feared, we are now on our own. This may be the last verified communication before total system compromise.",
+                image: "public/headline9.png",
+                priority: "featured",
+                urgent: true
+            }
+        ];
+
+        function createArticleElement(article, index) {
+            const articleEl = document.createElement('div');
+            articleEl.className = `article ${article.priority === 'featured' ? 'featured' : ''} ${article.priority === 'high' ? 'priority' : ''} ${article.urgent ? 'urgent' : ''}`;
+            
+            const currentDate = new Date();
+            const timeAgo = Math.floor(Math.random() * 120) + 1; // Random time between 1-120 minutes
+            
+            articleEl.innerHTML = `
+                <img src="${article.image}" alt="${article.title}" class="article-image">
+                <div class="article-content">
+                    <div class="article-category">${article.category}</div>
+                    <h2 class="article-title">${article.title}</h2>
+                    <p class="article-excerpt">${article.excerpt}</p>
+                    <div class="article-meta">
+                        <span class="article-date">${timeAgo} minutes ago</span>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            `;
+            
+            return articleEl;
+        }
+
+        function loadNews() {
+    const grid = document.getElementById('newsGrid');
+
+    newsData.forEach((article, index) => {
+        const articleElement = createArticleElement(article, index);
+        grid.appendChild(articleElement);
+
+        // Add staggered animation
+        setTimeout(() => {
+            articleElement.style.opacity = '0';
+            articleElement.style.transform = 'translateY(20px)';
+            articleElement.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+            requestAnimationFrame(() => {
+                articleElement.style.opacity = '1';
+                articleElement.style.transform = 'translateY(0)';
+            });
+        }, index * 100);
+    });
+}
+
+
+        // Load news when page loads
+        document.addEventListener('DOMContentLoaded', loadNews);
+    </script>
+</body>
+</html>
